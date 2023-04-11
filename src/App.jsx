@@ -7,11 +7,23 @@ function App() {
   // state
   let [name, setName] = useState("hau");
   let [address, setAddress] = useState("");
+  let [todos, setTodos] = useState([
+    { id: "todo1", name: "hau", title: "javascript" },
+    { id: "todo2", name: "hau", title: "java" },
+  ]);
 
   // handle Function
   let handleOnClick = (event) => {
-    setName(address);
-    console.log("address set name", address);
+    if (!address) {
+      alert("emtpy input");
+      return;
+    }
+    // setName(address);
+    // console.log("address set name", address);
+    let newTodo = { id: "abc", title: address };
+    // spread syntax array is
+    setTodos([...todos, newTodo]);
+    setAddress("");
   };
   let handleOnchange = (event) => {
     setAddress(event.target.value);
@@ -23,6 +35,11 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>minh hau code react js hook {name}</h2>
+        <div className="todo__container">
+          {todos.map((todo) => {
+            return <li key={todo.id}>{todo.title} </li>;
+          })}
+        </div>
         <input
           type="text"
           value={address}
